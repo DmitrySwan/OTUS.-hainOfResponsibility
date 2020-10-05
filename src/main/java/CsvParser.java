@@ -1,21 +1,29 @@
-import au.com.bytecode.opencsv.CSVReader;
-import au.com.bytecode.opencsv.bean.ColumnPositionMappingStrategy;
-import au.com.bytecode.opencsv.bean.CsvToBean;
+import com.opencsv.CSVReader;
+import com.opencsv.bean.ColumnPositionMappingStrategy;
+import com.opencsv.bean.CsvToBean;
+import model.Person;
 import model.PersonList;
 import model.PersonListObject;
-import model.PersonObject;
+import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
 import java.io.FileReader;
 
 public class CsvParser extends Parser {
+    private static final String CSV_EXTENSION = "csv";
+
     @Override
     @SuppressWarnings({"rawtypes", "unchecked"})
     public PersonList parse(File file) {
-        log.info("# Обработчик " + this.getClass().getName() + " получил файл " + file.getName());
+        log.info("# Handler " + this.getClass().getName() + " gets file " + file.getName());
         try (FileReader fileReader = new FileReader(file)) {
+            if (!CSV_EXTENSION.equalsIgnoreCase(FilenameUtils.getExtension(file.getName())))  //problem: txt, xml is parsed by CSV without exceptions
+                throw new Exception();
             CSVReader csvReader = new CSVReader(fileReader);
-            return (PersonListObject) new CsvToBean().parse(setColumnMapping(), csvReader);
+            CsvToBean bean = new CsvToBean();
+            bean.setCsvReader(csvReader);
+            bean.setMappingStrategy(setColumnMapping());
+            return new PersonListObject(bean.parse());
         } catch (Exception e) {
             log.error("File " + file + " can't be parsed in CSV format.");
         }
@@ -25,7 +33,7 @@ public class CsvParser extends Parser {
     @SuppressWarnings({"rawtypes", "unchecked"})
     private static ColumnPositionMappingStrategy setColumnMapping() {   //Set column mapping strategy
         ColumnPositionMappingStrategy strategy = new ColumnPositionMappingStrategy();
-        strategy.setType(PersonObject.class);
+        strategy.setType(Person.class);
         String[] columns = new String[]{"name", "age", "country", "profession"};
         strategy.setColumnMapping(columns);
         return strategy;

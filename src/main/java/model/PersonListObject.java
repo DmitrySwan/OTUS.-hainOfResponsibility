@@ -11,6 +11,10 @@ public class PersonListObject implements PersonList {
         persons = new ArrayList<>();
     }
 
+    public PersonListObject(List<Person> persons) {
+        this.persons = persons;
+    }
+
     public void add(Person person) {
         persons.add(person);
     }

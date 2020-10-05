@@ -28,8 +28,9 @@
 ### Описание тестирования:
 ###### 1 Способ. Уже собранный jar-файл (ChainOfResponsibility-1.0-jar-with-dependencies.jar) расположен в корне проекта.
 Пример запуска через cmd:  java -jar ChainOfResponsibility-1.0-jar-with-dependencies.jar -i inputFile.txt -o outputFile.txt -s merge
-Типы сортировки: insertion, merge, selection
-Пример формата заполнения файла input можно посмотреть в src/test/resources
+
+Пример формата заполнения файла input(файл, в котором прописываются пути для файлов разных форматов) можно посмотреть в src/test/resources
+Примеры заполнения файлов разных форматов(txt,xml,json,csv) можно посмотреть в src/test/resources/chainOfRepositoryTestFiles
 
 ###### 2 Способ.Тест расположен в директории src/test/java.
 input и expected output файлы лежат в src/test/resources.
@@ -51,6 +52,14 @@ Java HotSpot(TM) 64-Bit Server VM 18.9 (build 11.0.8+10-LTS, mixed mode)
 Apache Maven 3.3.9
 
 ##### Библиотеки:
+
+json-simple:https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple/1.1.1
+
+xstream:https://mvnrepository.com/artifact/com.thoughtworks.xstream/xstream/1.4.13
+
+gson:https://mvnrepository.com/artifact/com.google.code.gson/gson/2.8.6
+
+opencsv:https://mvnrepository.com/artifact/com.opencsv/opencsv/5.2
 
 log4j:https://mvnrepository.com/artifact/log4j/log4j/1.2.17
 

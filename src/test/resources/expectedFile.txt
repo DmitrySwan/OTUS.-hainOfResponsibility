@@ -1,0 +1,4 @@
+[Person{name='John', age=30, country='France', profession='cheesemaker'}, Person{name='Donovan', age=27, country='Spain', profession='scientist'}]
+[Person{name='Li', age=20, country='China', profession='swimmer'}, Person{name='Bob', age=32, country='Germany', profession='taxi driver'}]
+[Person{name='Tom', age=45, country='Japan', profession='trader'}, Person{name='James', age=55, country='USA', profession='judge'}]
+[Person{name='Lokesh', age=32, country='India', profession='teacher'}, Person{name='David', age=12, country='England', profession='programmer'}]

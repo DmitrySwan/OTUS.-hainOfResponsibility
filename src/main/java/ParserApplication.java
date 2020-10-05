@@ -1,10 +1,6 @@
 import model.PersonList;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.LinkedHashSet;
 import java.util.Scanner;
 import java.util.Set;
@@ -28,7 +24,7 @@ class ParserApplication {
                     Parser parser = new CsvParser();
                     parser.linkWith(new XMLParser())
                             .linkWith(new JsonParser())
-                            .linkWith(new TxtParser()); //цепочта обязанностей
+                            .linkWith(new TxtParser()); //chain of repository
                     printToOutputFile(parser.parse(file));
                 });
     }

@@ -10,7 +10,7 @@ import java.io.FileReader;
 public class JsonParser extends Parser {
     @Override
     public PersonList parse(File file) {
-        log.info("# Обработчик " + this.getClass().getName() + " получил файл " + file.getName());
+        log.info("# handler " + this.getClass().getName() + " gets file " + file.getName());
         JSONParser parser = new JSONParser();
         try (FileReader reader = new FileReader(file)) {
             JSONObject jsonObject = (JSONObject) parser.parse(reader);
