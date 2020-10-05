@@ -1,6 +1,8 @@
+import model.PersonList;
 import org.apache.log4j.Logger;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 abstract class Parser {
     static Logger log = Logger.getLogger(Parser.class);
@@ -10,27 +12,18 @@ abstract class Parser {
     /**
      * Помогает строить цепь из объектов-проверок.
      */
-    public Parser linkWith(Parser next) {
+    Parser linkWith(Parser next) {
         this.next = next;
         return next;
     }
 
-    public abstract String parse(File file);
+    public abstract PersonList parse(File file);
 
-    public boolean parseNext(File file) {
+    PersonList parseNext(File file) {
         if (next == null) {
-            return true;
+            log.error("File " + file + " can't be parsed.");
+            return null;
         }
-        return next.parse();
-    }
-
-    private void printToOutputFile(String text) {
-        try (FileWriter fw = new FileWriter(outputFile, true);
-             BufferedWriter bw = new BufferedWriter(fw);
-             PrintWriter out = new PrintWriter(bw)) {
-            out.println(text);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        return next.parse(file);
     }
 }

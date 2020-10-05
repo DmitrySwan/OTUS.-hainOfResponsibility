@@ -1,24 +1,23 @@
 import com.google.gson.Gson;
-import model.Person;
+import model.PersonList;
+import model.PersonListObject;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import java.io.File;
 import java.io.FileReader;
-import java.io.IOException;
 
 public class JsonParser extends Parser {
     @Override
-    public String parse(File file) {
+    public PersonList parse(File file) {
         log.info("# Обработчик " + this.getClass().getName() + " получил файл " + file.getName());
         JSONParser parser = new JSONParser();
-        try (FileReader reader = new FileReader(file))
-        {
+        try (FileReader reader = new FileReader(file)) {
             JSONObject jsonObject = (JSONObject) parser.parse(reader);
-            return new Gson().fromJson(jsonObject.toJSONString(), Person.class).toString();
-        } catch (IOException | ParseException e) {
-            e.printStackTrace();
+            return new Gson().fromJson(jsonObject.toJSONString(), PersonListObject.class);
+        } catch (Exception e) {
+            log.error("File " + file + " can't be parsed in JSON format.");
         }
         return parseNext(file);
     }
+}

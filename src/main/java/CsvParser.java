@@ -1,34 +1,32 @@
 import au.com.bytecode.opencsv.CSVReader;
+import au.com.bytecode.opencsv.bean.ColumnPositionMappingStrategy;
 import au.com.bytecode.opencsv.bean.CsvToBean;
+import model.PersonList;
+import model.PersonListObject;
+import model.PersonObject;
 
 import java.io.File;
 import java.io.FileReader;
 
 public class CsvParser extends Parser {
     @Override
-    public String parse(File file) {
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    public PersonList parse(File file) {
         log.info("# Обработчик " + this.getClass().getName() + " получил файл " + file.getName());
+        try (FileReader fileReader = new FileReader(file)) {
+            CSVReader csvReader = new CSVReader(fileReader);
+            return (PersonListObject) new CsvToBean().parse(setColumnMapping(), csvReader);
+        } catch (Exception e) {
+            log.error("File " + file + " can't be parsed in CSV format.");
+        }
+        return parseNext(file);
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})
-    public static void main(String[] args) throws Exception
-    {
-        CsvToBean csv = new CsvToBean();
-        String csvFilename = "data.csv";
-        CSVReader csvReader = new CSVReader(new FileReader(csvFilename));
-        //Set column mapping strategy
-        List list = csv.parse(setColumMapping(), csvReader);
-        for (Object object : list) {
-            Employee employee = (Employee) object;
-            System.out.println(employee);
-        }
-    }
-    @SuppressWarnings({"rawtypes", "unchecked"})
-    private static ColumnPositionMappingStrategy setColumMapping()
-    {
+    private static ColumnPositionMappingStrategy setColumnMapping() {   //Set column mapping strategy
         ColumnPositionMappingStrategy strategy = new ColumnPositionMappingStrategy();
-        strategy.setType(Employee.class);
-        String[] columns = new String[] {"id", "firstName", "lastName", "country", "age"};
+        strategy.setType(PersonObject.class);
+        String[] columns = new String[]{"name", "age", "country", "profession"};
         strategy.setColumnMapping(columns);
         return strategy;
     }

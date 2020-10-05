@@ -7,29 +7,29 @@ import java.io.File;
 import java.io.IOException;
 
 public class ChainOfResponsibilityTest {
-   /* private static final String TARGET_TEST_RESOURCES_PATH = "target/test-classes/";
-
+    private static final String TARGET_TEST_RESOURCES_PATH = "target/test-classes/";
+/*
     @DataProvider
     public Object[][] sortTestData() {
         return new Object[][]{
-                {Main.INSERTION, "testOutputInsertion.txt", "testOutputFileInsertionExpected.txt"},
-                {Main.MERGE, "testOutputMerge.txt", "testOutputFileMergeExpected.txt"},
-                {Main.SELECTION, "testOutputSelection.txt", "testOutputFileSelectionExpected.txt"},
+                {"i.txt", "testOutputFileInsertionExpected.txt"},
+                "testOutputMerge.txt", "testOutputFileMergeExpected.txt"},
+                {"testOutputSelection.txt", "testOutputFileSelectionExpected.txt"},
         };
-    }
+    }*/
 
-    @Test(description = "", dataProvider = "sortTestData")
-    public void sortTest(String sortType, String outputFilePath, String outputFileExpectedPath) throws IOException {
-        String targetOutputFilePath = TARGET_TEST_RESOURCES_PATH + outputFilePath;
+    @Test(description = "")
+    public void sortTest() throws IOException {
+        String targetOutputFilePath = TARGET_TEST_RESOURCES_PATH + "outputFile.txt";
         Main.main(
                 new String[]{
-                        "-i",  TARGET_TEST_RESOURCES_PATH + "testInputFile.txt",
-                        "-o", targetOutputFilePath,
-                        "-s", sortType
+                        "-i",  TARGET_TEST_RESOURCES_PATH + "inputFile.txt",
+                        "-o", targetOutputFilePath
                 });
+        System.setProperty( "user.dir",  TARGET_TEST_RESOURCES_PATH);
          Assert.assertTrue(contentEquals(
                  new File(targetOutputFilePath),
-                 new File(TARGET_TEST_RESOURCES_PATH + outputFileExpectedPath)
+                 new File(TARGET_TEST_RESOURCES_PATH + "expected.txt")
          ));
-    }*/
+    }
 }
