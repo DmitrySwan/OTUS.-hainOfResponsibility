@@ -27,9 +27,10 @@
 
 ### Описание тестирования:
 ###### 1 Способ. Уже собранный jar-файл (ChainOfResponsibility-1.0-jar-with-dependencies.jar) расположен в корне проекта.
-Пример запуска через cmd:  java -jar ChainOfResponsibility-1.0-jar-with-dependencies.jar -i inputFile.txt -o outputFile.txt -s merge
+Пример запуска через cmd:  java -jar ChainOfResponsibility-1.0-jar-with-dependencies.jar -i inputFile.txt -o outputFile.txt
 
 Пример формата заполнения файла input(файл, в котором прописываются пути для файлов разных форматов) можно посмотреть в src/test/resources
+
 Примеры заполнения файлов разных форматов(txt,xml,json,csv) можно посмотреть в src/test/resources/chainOfRepositoryTestFiles
 
 ###### 2 Способ.Тест расположен в директории src/test/java.
@@ -39,7 +40,8 @@ input и expected output файлы лежат в src/test/resources.
 
 ### Логирование: 
 Файл report.log созданиется в директории проекта/jar файла.
-Содержит информацию о входном массиве, способе сортировке и выходном массиве.
+Содержит информацию о этапах прохождения кажждым файлом цепочки обязанностей.
+(Она определена в классе ParserApplication в методе parse() в формате -> [csv - xml - json - txt])
 
 ##### Диаграмма классов:
 Файл diagram.png находится в корне проекта (сгенерирован ресурсами Intelij IDEA)
