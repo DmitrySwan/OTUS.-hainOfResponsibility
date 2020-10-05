@@ -27,7 +27,6 @@ public class ChainOfResponsibilityTest {
     @Test(description = "")
     public void sortTest() throws IOException {
         String targetOutputFilePath = TARGET_TEST_RESOURCES_PATH + "outputFile.txt";
-        System.setProperty("user.dir", TARGET_TEST_RESOURCES_PATH);
         Main.main(
                 new String[]{
                         "-i", TARGET_TEST_RESOURCES_PATH + "inputFile.txt",
