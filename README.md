@@ -27,7 +27,7 @@
 
 ### Описание тестирования:
 ###### 1 Способ. Уже собранный jar-файл (ChainOfResponsibility-1.0-jar-with-dependencies.jar) расположен в корне проекта.
-Пример запуска через cmd:  java -jar ChainOfResponsibility-1.0-jar-with-dependencies.jar -i inputFile.txt -o outputFile.txt -s merge
+Пример запуска через cmd:  java -jar ChainOfResponsibility-1.0-jar-with-dependencies.jar -i inputFile.txt -o outputFile.txt
 
 Пример формата заполнения файла input(файл, в котором прописываются пути для файлов разных форматов) можно посмотреть в src/test/resources
 Примеры заполнения файлов разных форматов(txt,xml,json,csv) можно посмотреть в src/test/resources/chainOfRepositoryTestFiles
