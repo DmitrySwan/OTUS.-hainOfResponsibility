@@ -1,17 +1,17 @@
 import model.Person;
-import model.PersonList;
-import model.PersonListObject;
 
 import java.io.File;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
 public class TxtParser extends Parser {
 
     @Override
-    public PersonList parse(File file) {
+    public List<Person> parse(File file) {
         log.info("# handler " + this.getClass().getName() + " gets file " + file.getName());
 
-        PersonListObject persons = new PersonListObject();
+        List<Person> persons = new LinkedList<>();
         try (Scanner input = new Scanner(file)) {
             while (input.hasNext()) {
                 Person person = new Person();

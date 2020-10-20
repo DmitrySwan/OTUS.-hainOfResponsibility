@@ -2,19 +2,18 @@ import com.opencsv.CSVReader;
 import com.opencsv.bean.ColumnPositionMappingStrategy;
 import com.opencsv.bean.CsvToBean;
 import model.Person;
-import model.PersonList;
-import model.PersonListObject;
 import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
 import java.io.FileReader;
+import java.util.List;
 
 public class CsvParser extends Parser {
     private static final String CSV_EXTENSION = "csv";
 
     @Override
     @SuppressWarnings({"rawtypes", "unchecked"})
-    public PersonList parse(File file) {
+    public List<Person> parse(File file) {
         log.info("# Handler " + this.getClass().getName() + " gets file " + file.getName());
         try (FileReader fileReader = new FileReader(file)) {
             if (!CSV_EXTENSION.equalsIgnoreCase(FilenameUtils.getExtension(file.getName())))  //problem: txt, xml is parsed by CSV without exceptions
@@ -23,7 +22,7 @@ public class CsvParser extends Parser {
             CsvToBean bean = new CsvToBean();
             bean.setCsvReader(csvReader);
             bean.setMappingStrategy(setColumnMapping());
-            return new PersonListObject(bean.parse());
+            return bean.parse();
         } catch (Exception e) {
             log.error("File " + file + " can't be parsed in CSV format.");
         }

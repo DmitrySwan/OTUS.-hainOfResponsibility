@@ -1,7 +1,12 @@
-import model.PersonList;
+import model.Person;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -43,7 +48,7 @@ class ParserApplication {
         return files;
     }
 
-    private void printToOutputFile(PersonList personList) {
+    private void printToOutputFile(List<Person> personList) {
         try (FileWriter fw = new FileWriter(outputFile, true);
              BufferedWriter bw = new BufferedWriter(fw);
              PrintWriter out = new PrintWriter(bw)) {

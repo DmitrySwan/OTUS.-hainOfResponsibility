@@ -1,5 +1,11 @@
 package model;
 
-public interface PersonList {
-    public String toString();
+import java.util.List;
+
+public class PersonList {
+    private List<Person> persons;
+
+    public List<Person> getPersons() {
+        return persons;
+    }
 }
